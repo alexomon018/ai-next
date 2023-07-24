@@ -7,8 +7,6 @@ export default async function Home() {
 
     let href = userId ? "/journal" : "/new-user";
 
-    console.log("userId", userId);
-
     return (
         <div className="flex items-center justify-center w-screen h-screen text-white bg-black">
             <div className="w-full max-w-[600px] mx-auto">
