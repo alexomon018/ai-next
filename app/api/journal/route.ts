@@ -16,3 +16,20 @@ export const POST = async () => {
 
     return NextResponse.json({ data: entry });
 };
+
+export const DELETE = async (request: Request, { params }) => {
+    const user = await getUserByClerkID();
+
+    await prisma.journalEntry.delete({
+        where: {
+            userId_id: {
+                userId: user.id,
+                id: params.id,
+            },
+        },
+    });
+
+    revalidatePath("/journal");
+
+    return NextResponse.next();
+};
