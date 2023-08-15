@@ -3,6 +3,7 @@ import { prisma } from "@/utils/db";
 import EntryCard from "@/components/EntryCard";
 import Link from "next/link";
 import NewEntryCard from "@/components/NewEntryCard";
+import { analyze } from "@/utils/ai";
 
 const getEntries = async () => {
     const user = await getUserByClerkID();
@@ -14,6 +15,8 @@ const getEntries = async () => {
             createdAt: "desc",
         },
     });
+
+    await analyze("write me about your day");
 
     return entries;
 };

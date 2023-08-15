@@ -21,8 +21,10 @@ const EntryPage = async ({ params }) => {
     const entry = await getEntry(params.id);
 
     return (
-        <div>
-            <Editor entry={entry} />
+        <div className="grid w-full h-full grid-cols-[1fr,1fr]">
+            <div className="col-span-2">
+                <Editor entry={entry} />
+            </div>
         </div>
     );
 };
