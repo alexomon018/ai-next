@@ -19,13 +19,15 @@ type EditorProps = {
 const Editor = ({ entry }: EditorProps) => {
     const [value, setValue] = useState(entry?.content);
     const [isLoading, setisLoading] = useState(false);
-    const [currentEntry, setEntry] = useState(entry);
+    const [analysis, setAnalysis] = useState(entry?.analysis);
 
     useAutosave({
         data: value,
         onSave: async (_value) => {
             setisLoading(true);
-            await updateJournalEntry(entry.id, _value);
+            const data = await updateJournalEntry(entry.id, _value);
+            setAnalysis(data?.analysis);
+
             setisLoading(false);
         },
     });
@@ -38,8 +40,8 @@ const Editor = ({ entry }: EditorProps) => {
 
     return (
         <div className="relative grid w-full h-full grid-cols-3 gap-0">
-            {isLoading && <div>...Loading</div>}
             <div className="col-span-2">
+                {isLoading && <div>...Loading</div>}
                 <textarea
                     className="w-full p-8 text-xl bg-inherit"
                     value={value}
@@ -49,7 +51,7 @@ const Editor = ({ entry }: EditorProps) => {
 
             <div className="border-l border-black/5">
                 <div
-                    style={{ background: currentEntry.analysis?.color }}
+                    style={{ background: analysis?.color }}
                     className="h-[100px] bg-blue-600 text-white p-8"
                 >
                     <h2 className="text-2xl text-black bg-white/25">
@@ -60,18 +62,20 @@ const Editor = ({ entry }: EditorProps) => {
                     <ul role="list" className="divide-y divide-gray-200">
                         <li className="flex items-center justify-between px-8 py-4">
                             <div className="w-1/3 text-xl font-semibold">
+                                Summary
+                            </div>
+                            <div className="text-xl">{analysis.summary}</div>
+                        </li>
+                        <li className="flex items-center justify-between px-8 py-4">
+                            <div className="w-1/3 text-xl font-semibold">
                                 Subject
                             </div>
-                            <div className="text-xl">
-                                {currentEntry.analysis?.subject}
-                            </div>
+                            <div className="text-xl">{analysis.subject}</div>
                         </li>
 
                         <li className="flex items-center justify-between px-8 py-4">
                             <div className="text-xl font-semibold">Mood</div>
-                            <div className="text-xl">
-                                {currentEntry.analysis?.mood}
-                            </div>
+                            <div className="text-xl">{analysis.mood}</div>
                         </li>
 
                         <li className="flex items-center justify-between px-8 py-4">
@@ -79,9 +83,7 @@ const Editor = ({ entry }: EditorProps) => {
                                 Negative
                             </div>
                             <div className="text-xl">
-                                {currentEntry.analysis?.negative
-                                    ? "True"
-                                    : "False"}
+                                {analysis.negative ? "True" : "False"}
                             </div>
                         </li>
                         <li className="flex items-center justify-between px-8 py-4">
