@@ -43,7 +43,7 @@ const Editor = ({ entry }: EditorProps) => {
             <div className="col-span-2">
                 {isLoading && <div>...Loading</div>}
                 <textarea
-                    className="w-full p-8 text-xl bg-inherit"
+                    className="w-full h-full p-8 overflow-auto text-xl bg-inherit"
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />

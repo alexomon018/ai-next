@@ -15,10 +15,11 @@ model User {
   id        String         @id @default(uuid())
   email     String         @unique
   name      String?
-  clerkId  String        @unique
+  clerkId   String         @unique
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
   entries   JournalEntry[]
+  analysis  Analysis[]
 }
 
 model JournalEntry {
@@ -30,20 +31,25 @@ model JournalEntry {
   content   String    @db.Text
   analysis  Analysis?
 
-  @@unique([userId,id])
+  @@unique([userId, id])
 }
 
 model Analysis {
-  id        String       @id @default(uuid())
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   entryId   String
-  entry     JournalEntry @relation(fields: [entryId], references: [id],onDelete: Cascade)
-  mood      String
-  summary   String
-  color     String
-  negative  Boolean
-  subject  String
+
+  entry          JournalEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  userId         String
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mood           String
+  summary        String
+  color          String
+  negative       Boolean
+  subject        String
   sentimentScore Float
+
   @@unique([entryId])
+  @@index([userId])
 }

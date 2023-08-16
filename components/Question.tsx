@@ -1,14 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import { askQuestion } from "@/utils/api";
+import { useState } from "react";
 
 const Question = () => {
     const [question, setQuestion] = useState("");
     const [answer, setAnswer] = useState(null);
     const [loading, setLoading] = useState(false);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
 
-    const handleSubmit = async (e) => {};
-
+        const anwser = await askQuestion(question);
+        setAnswer(anwser);
+        setLoading(false);
+        setQuestion("");
+    };
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -16,7 +23,7 @@ const Question = () => {
                     type="text"
                     value={question}
                     onChange={(e) => setQuestion(e.target.value)}
-                    className="p-2 text-lg border border-gray-300 rounded-md"
+                    className="p-2 text-lg text-black border border-gray-300 rounded-md"
                     disabled={loading}
                     placeholder="Ask a question..."
                 />

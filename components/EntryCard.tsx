@@ -13,7 +13,6 @@ const EntryCard = ({ entry }: EntryCardProps) => {
 
     const { summary, mood } = entry?.analysis;
 
-    console.log(summary, mood);
     return (
         <div className="overflow-hidden bg-white divide-y divide-gray-200 rounded-lg shadow">
             <div className="px-4 py-5 text-black sm:px-6">{date}</div>
