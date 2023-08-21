@@ -35,6 +35,7 @@
     "@vitejs/plugin-react-swc": "^3.3.2",
     "jsdom": "^22.1.0",
     "prisma": "^5.0.0",
-    "vitest": "^0.34.1"
+    "vitest": "^0.34.1",
+    "vitest-mock-extended": "^1.2.0"
   }
 }

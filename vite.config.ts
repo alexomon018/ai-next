@@ -11,4 +11,9 @@ export default defineConfig({
     setupFiles: 'setupTests',
     mockReset: true,
   },
+  resolve: {
+    alias: {
+      '@': '/',
+    },
+  },
 });
