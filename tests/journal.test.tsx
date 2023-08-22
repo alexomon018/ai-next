@@ -57,5 +57,3 @@ test(`Journal`, async () => {
   render(await Page());
   expect(screen.getByText('Journal')).toBeTruthy();
 });
-
-test('Give back entries', async () => {});
