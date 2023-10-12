@@ -7,7 +7,7 @@ npm-debug.log*
 .env
 .env.local
 
-
+utils/props.json
 # Runtime data
 pids
 *.pid

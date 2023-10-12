@@ -1,5 +1,4 @@
 'use client';
-
 import { askQuestion } from '@/utils/api';
 import { useState } from 'react';
 

@@ -15,7 +15,6 @@ export const performFetchRequest = async (url: string, options: FetchArgs) => {
         ...options,
       })
     );
-
     if (res.ok) {
       const data = await res.json();
       return data.data;
@@ -50,8 +49,11 @@ export const deleteJournalEntry = async (id: string) => {
 
 export const askQuestion = async (question: string) => {
   const options = {
+    headers: {
+      Authorization: `Bearer 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`,
+    },
     method: 'POST',
     body: JSON.stringify({ question }),
   } as FetchArgs;
-  return performFetchRequest('/api/questions', options);
+  return performFetchRequest('/api/question', options);
 };
