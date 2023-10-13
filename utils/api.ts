@@ -49,6 +49,9 @@ export const deleteJournalEntry = async (id: string) => {
 
 export const askQuestion = async (question: string) => {
   const options = {
+    headers: {
+      Authorization: `Bearer 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`,
+    },
     method: 'POST',
     body: JSON.stringify({ question }),
   } as FetchArgs;
